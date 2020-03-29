@@ -18,6 +18,8 @@ class Graph:
             nodeB.neigh.append(nodeA)
         if nodeB not in nodeA.neigh:
             nodeA.neigh.append(nodeB)
+        self.addNode( nodeA)
+        self.addNode(nodeB)
     def removeUndirectedEdge (self,nodeA, nodeB):
         if nodeA  in nodeB.neigh:
             nodeB.neigh.remove(nodeA)

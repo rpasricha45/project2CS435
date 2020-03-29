@@ -16,6 +16,7 @@ def createRandomUnweightedGraphIter(n):
         nodes.append(node)
     for i in range(1, len(nodes)):
         graph.addUndirectedEdge(nodes[i],nodes[i-1])
+    return graph
 
 # c
 def createLinkedList (n):
@@ -25,7 +26,7 @@ def createLinkedList (n):
         tempNode =  Node(n,[])
         nodeList.append(tempNode)
     for i in range ( 1, len(nodeList)):
-        nodeList[i-1].neigh = nodeList[i]
+        nodeList[i-1].neigh.append(nodeList[i])
     for node in nodeList:
         graph.addNode(node)
     return  graph
@@ -124,7 +125,7 @@ def BSTIter( graph):
     :return: List []
     """
     rtList = []
-    hasSeen = ()
+    hasSeen = set ()
     for nodes in graph.adjancyList:
         BSTIterHelper(nodes, rtList , hasSeen)
     return rtList

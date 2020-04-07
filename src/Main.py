@@ -11,14 +11,21 @@ from Question6 import   createRandomGridGraph
 
 #problem 4
 def topolgicalSortTest (g):
+    print("running test for question 4 ")
 
     topS = TopSort()
-
-
     list = topS.Kahns(g)
+    print("khans algo ")
+    for node in list:
+        print( node.val)
+    print("mdfs")
     list2 = topS.mDFS(g)
+    for n in list2:
+        print(n.val)
+
 # problem 5
 def dijkstrastest(g):
+    print("starting test for problem 5 ")
     nodeStart = None
     for key in g.adjancyList:
         nodeStart =key
@@ -41,7 +48,7 @@ def printPair(gridNode):
     print(str(gridNode.x) + " ," + " " + str(gridNode.y))
 
 def astartest(graph):
-    print('startign test')
+    print('starting test for problem 6 ')
     startNode = None
     for key in graph.adjancyList:
         if key.x == 0 and key.y == 0:
@@ -65,7 +72,7 @@ def astartest(graph):
         printPair(node)
 def main():
     #4
-    g = createRandomDAGIter(1)
+    g = createRandomDAGIter(1000)
     topolgicalSortTest(g)
     #5
     weighted  = createRandomCompleteWeightedGraph(10)

@@ -8,7 +8,8 @@ class Node(object):
         self.neigh = neighbors
 
 class Graph:
-    adjancyList = dict()
+    def __init__(self, dict):
+        self.adjancyList = dict
     # I am changing the definition of the method
     def addNode(self,node):
         #Todo please implement

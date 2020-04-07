@@ -16,7 +16,6 @@ class DirectedGraph(Graph):
         if nodeB in nodeA.neigh:
             nodeA.neigh.remove(nodeB)
 
-
 #C
 def createRandomDAGIter(n):
     graph = DirectedGraph(dict())
@@ -31,26 +30,18 @@ def createRandomDAGIter(n):
         graph.addDirectedEdge(myNodes[numb1],myNodes[numb2])
         nodesAdded = len(graph.adjancyList)
     return graph
-
-
-
 class TopSort():
     #TODO please implement
-    def inorder ( self , node,inorder,hasSeen):
-        """
-        :param node
-        :return:
-        """
-        if node not in inorder:
-            inorder[node] = 0
-        for neigh in node.neigh:
-            hasSeen.add(neigh)
-            if neigh not in inorder:
-                inorder[neigh] = 1
-            elif neigh in inorder :
-                inorder[neigh] +=1
-            self.inorder(neigh,inorder,hasSeen)
 
+    def inorder(self,graph,myDict):
+        for node in graph.adjancyList:
+            if node not in myDict:
+                myDict[node] = 0
+            for neighbors in node.neigh:
+                if neighbors not in myDict:
+                    myDict[neighbors] =1
+                else:
+                    myDict[neighbors] +=1
 
     def Kahns (self,graph):
         nodeDependencies = dict()
@@ -58,10 +49,9 @@ class TopSort():
 
         # first find the then number of dependecies
         hasSeen = set()
-        for node in adList:
-            if node not in hasSeen:
-                self.inorder(node,nodeDependencies,hasSeen)
-                hasSeen.add(node)
+
+        self.inorder(graph,nodeDependencies)
+
         q = []
         rtVal = []
         for node in nodeDependencies:
@@ -78,19 +68,21 @@ class TopSort():
         return rtVal
 
 
-    def helperMdfs(self, node , stack,hasSeen):
-        #Todo please fix how the logic for visted
-        if len(node.neigh) == 0:
-            stack.append(node)
-            return
-        for neighbors in node.neigh:
-            # if  neighbors in hasSeen:
-            #     print("there is a cycle")
-            #     return
-            hasSeen.add(neighbors)
-            self.helperMdfs(neighbors,stack,hasSeen)
+    def helperMdfs(self,output,recStack,hasSeen,cycle):
+        while len(recStack) >0:
+            node = recStack.pop(-1)
+            if node in cycle:
+                output.append(node)
+                continue
+            cycle.add(node)
+            if len(node.neigh) == 0:
+                output.append(node)
+            for neighbors in node.neigh:
+                hasSeen.add(neighbors)
+                recStack.append(neighbors)
+            recStack.append(node)
 
-        stack.append(node)
+
 
 
     def mDFS (self, graph):
@@ -103,7 +95,9 @@ class TopSort():
         for node in adjancyList:
             # call the helper method
             if node not in hasSeen:
-                self.helperMdfs(node , stack,hasSeen)
+                recStack = [node]
+                cycle = set()
+                self.helperMdfs( stack,recStack,hasSeen,cycle)
         return stack
 
 

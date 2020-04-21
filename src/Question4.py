@@ -99,9 +99,3 @@ class TopSort():
                 cycle = set()
                 self.helperMdfs( stack,recStack,hasSeen,cycle)
         return stack
-
-
-
-
-
-

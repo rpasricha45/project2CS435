@@ -96,14 +96,3 @@ def dijkstrasMain(start):
     dijkstrasDriver(start ,start,hasSeen,rtVal)
     return rtVal
 
-
-
-
-
-
-
-
-
-
-
-

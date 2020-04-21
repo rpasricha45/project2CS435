@@ -17,8 +17,7 @@ class GridGraph:
 
     def isNeighbor(self,gridNodeA,gridNodeB):
         # assuming no duplicate values
-        if gridNodeB.x <0 or gridNodeB.y <0:
-            return False
+
         xMoves = [0,1,-1]
         yMoves = [0,1,-1]
         for combo in xMoves:
@@ -30,7 +29,6 @@ class GridGraph:
 
         return False
 
-        pass
     def addNode (self , gridNode):
         self.adjancyList[gridNode] = gridNode.neigh
 
@@ -115,7 +113,7 @@ def createRandomGridGraph(n):
     return graph
 
 
-def hurstic (gridNodeA , gridNodeB):
+def heuristic  (gridNodeA , gridNodeB):
     # TODO calcualte the manhatten distance bettween the two
     return abs(gridNodeA.x-gridNodeB.x) + abs(gridNodeA.y-gridNodeB.y)
 
@@ -125,22 +123,22 @@ def astar (sourceNode , destNode):
     :param destNode: GridNode
     :return: list()
     """
-    if sourceNode == None or destNode == None:
+    if sourceNode is None or destNode is None:
         print("input is not correct")
         return None
     rtVal = []
     map = dict()
     visted = set()
     curent = sourceNode
-    map[curent] = [0,hurstic(curent,destNode)]
+    map[curent] = [0,heuristic (curent,destNode)]
     while curent != destNode:
-        if curent == None:
+        if curent is None:
             print("there is an error")
             break
         for neighbors in curent.neigh:
             if neighbors not in visted:
                 gVal =getDistance(neighbors,curent) + map[curent][0]
-                hVal = hurstic(neighbors,destNode)
+                hVal = heuristic (neighbors,destNode)
                 if neighbors not in map:
                     map[neighbors] = [gVal,hVal]
                 elif gVal< map[neighbors][0]:

@@ -24,7 +24,7 @@ def topolgicalSortTest (g):
         print(n.val)
 
 # problem 5
-def dijkstrastest(g):
+def dijkstrasTest(g):
     print("starting test for problem 5 ")
     nodeStart = None
     for key in g.adjancyList:
@@ -76,7 +76,7 @@ def main():
     topolgicalSortTest(g)
     #5
     weighted  = createRandomCompleteWeightedGraph(10)
-    dijkstrastest(weighted)
+    dijkstrasTest(weighted)
     #6
     grid =  createRandomGridGraph(100)
 
